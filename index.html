@@ -60,7 +60,7 @@ $( document ).ready(function() {
                          data: { 
 							"ref_id": getUrlParameter('ref_id'),
 							"type": getUrlParameter('type'),
-							"data" : JSON.stringify(performance_person),
+							"data" : data,
 						 },
                          success: function(){
 							console.log('[LOG] success retrieval');
