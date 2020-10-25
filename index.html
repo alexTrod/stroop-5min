@@ -33,7 +33,7 @@
 
 <script>
 $( document ).ready(function() {
-
+		
     jsPsych.init({
              timeline: stroop_experiment,
              display_element: "getDisplayElement",
@@ -41,23 +41,27 @@ $( document ).ready(function() {
              on_trial_finish: function(data){
                addID('stroop')
              },
-
+				
              on_finish: function(data){
 
                  // Serialize the data
                  var promise = new Promise(function(resolve, reject) {
-                     var data = jsPsych.data.dataAsJSON();
-					 console.log('data = ' + data);
+                     var data = jsPsych.data.dataAsJSON();	
+					 performance_person = assessPerformance();
                      resolve(data);
                  })
-
+				
                  promise.then(function(data) {
 
 
                      $.ajax({
                          type: "POST",
-                         url: 'https://api-denoize.herokuapp.com/cognitive-experiment/',
-                         data: { "data": data },
+                         url: 'http://127.0.0.1:8000/CognitiveExperiment/',
+                         data: { 
+							"ref_id": getUrlParameter('ref_id'),
+							"type": getUrlParameter('type'),
+							"data" : JSON.stringify(performance_person),
+						 },
                          success: function(){ document.location = "/next" },
                          dataType: "application/json",
 

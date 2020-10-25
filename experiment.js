@@ -74,6 +74,21 @@ function evalAttentionChecks() {
 	return check_percent
 }
 
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
 		'</p></div>'
@@ -305,6 +320,7 @@ var start_practice_block = {
 		trial_id: "practice_intro"
 	},
 	timing_response: 180000,
+	//timing_response: 180,
 	text: '<div class = centerbox><p class = block-text>Let\'s start with a few practice trials. Remember, press the key corresponding to the <strong><u>font color</u></strong> of the word. </p><p class = block-text></p><p class = block-text>Press <strong>enter</strong> to begin the practice.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
@@ -316,6 +332,7 @@ var start_test_block = {
 		trial_id: "test_intro"
 	},
 	timing_response: 180000,
+	//timing_response: 180,
 	text: '<div class = centerbox><p class = center-block-text>Great job! Now that you\'ve had a bit of practice, let\'s play for real this time. Remember to respond as <u><strong>quickly and accurately</strong></u> as you can. </p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
@@ -359,6 +376,7 @@ for (i = 0; i < practice_len; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>GO FASTER!</font></div></div>',
 		choices: choices,
 		timing_response: 1500,
+		//timing_response: 15,
 		timing_stim: -1,
 		timing_feedback_duration: 500,
 		show_stim_with_feedback: true,
@@ -389,6 +407,7 @@ for (i = 0; i < exp_len; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>GO FASTER!</font></div></div>',
 		choices: choices,
 		timing_response: 1500,
+		//timing_response: 15,
 		timing_stim: -1,
 		timing_feedback_duration: 500,
 		show_stim_with_feedback: true,
