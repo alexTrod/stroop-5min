@@ -56,20 +56,22 @@ $( document ).ready(function() {
 
                      $.ajax({
                          type: "POST",
-                         url: 'http://127.0.0.1:8000/CognitiveExperiment/',
+                         url: 'https://api-denoize.herokuapp.com/gedrag/',
                          data: { 
 							"ref_id": getUrlParameter('ref_id'),
 							"type": getUrlParameter('type'),
 							"data" : JSON.stringify(performance_person),
 						 },
-                         success: function(){ document.location = "/next" },
+                         success: function(){
+							console.log('[LOG] success retrieval');
+						 },
                          dataType: "application/json",
 
                          // Endpoint not running, local save
                          error: function(err) {
 
                              if (err.status == 200){
-                                 document.location = "/next";
+                                 //document.location = "/next";
                              } else {
                                  // If error, assue local save
                                //  jsPsych.data.localSave('stroop_results.csv', 'csv');
